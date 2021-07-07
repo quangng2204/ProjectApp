@@ -1,0 +1,65 @@
+{% extends "userbase.html"%}
+    {% block content %}
+    <div>
+        <div class="container">
+            <div class="jumbotron">
+                {% if project %}
+                    <h1>Edit Project</h1>
+                {% else %}
+                    <h1>New Project</h1>
+                {% endif %}
+                <div>
+                    <h1 class="h2 text-info"></h1>
+                    <div class="btn-toolbar mb-2 mb-md-0">
+                        <a class="btn btn-sm btn-outline-info" href="/userHome">
+                            <span data-feather="plus"></span>
+                            Cancel
+                        </a>
+                    </div>
+                </div>
+                <form action="/newProject" method="post" novalidate>
+                    {{ form.hidden_tag() }}
+                    {% if project %}
+                        <input type="hidden" name="hiddenProjectId" value="{{project.project_id}}">
+                    {% else %}
+                        <input type="hidden" name="hiddenProjectId" value="0">
+                    {% endif %}
+                    <div class="form-group">
+                        {{ form.inputName.label(class="sr-only") }}
+                        {{ form.inputName(class="form-control", placeholder="Project name") }}
+                        {% if form.inputName.errors %}
+                            {% for error in form.inputName.errors %}
+                            <div class="alert alert-danger">
+                                <strong>Error:</strong>[{{error}}]
+                            </div>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        {{ form.inputDescription.label(class="sr-only") }}
+                        {{ form.inputDescription(class="form-control", placeholder="Description") }}
+                        {% if form.inputDescription.errors %}
+                            {% for error in form.inputDescription.errors %}
+                            <div class="alert alert-danger">
+                                <strong>Error:</strong>[{{error}}]
+                            </div>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        {{ form.inputDeadline(class="form-control", placeholder="Write task here") }}
+                        {% if form.inputDeadline.errors %}
+                            {% for error in form.inputDeadline.errors %}
+                            <div class="alert alert-danger">
+                                <strong>Error:</strong>[{{error}}]
+                            </div>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                    <p class="lead"></p>
+                    {{ form.submit(class="btn btn-lg btn-success btn-block")}}
+                </form>
+            </div>
+        </div>
+    </div> 
+{% endblock %}

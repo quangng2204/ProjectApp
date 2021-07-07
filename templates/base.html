@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link href="../static/bootstrap-4/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+
+        <ul class="navbar-nav" float="right">
+            <li class="nav-item">
+                <a class="nav-link" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/signIn">Sign In</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="/signUp">Sign Up</a>
+            </li>
+        </ul>
+    </nav>
+    <!-- End Header --->
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+       {% for message in messages %}
+       <div class="alert alert-danger">
+          <strong>Error:</strong> [{{message}}]
+       </div>
+       {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    {% block content %}{% endblock %}
+
+    <!-- footer -->
+    <div class="jumbotron text-center" style="margin-bottom:0">
+        <p>Copyright @2021 by Nguyen Van Hong Quang</p>
+    </div>
+    <!-- End footer --->
+</body>
+</html>
